@@ -7,6 +7,8 @@ import android.widget.ProgressBar
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 import java.net.URL
 import java.text.SimpleDateFormat
@@ -14,15 +16,14 @@ import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
-    val CITY: String = "paris,fr"
+    val CITY: String = "Montreuil, Fr"
     val API: String = "780d717b26d0e1f63e38f15e2a399ff2"
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         weatherTask().execute()
-
     }
 
     inner class weatherTask() : AsyncTask<String, Void, String>() {
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             return response
         }
 
-        override fun onPostExecute(result: String?) {
+        override fun onPostExecute(result: String) {
             super.onPostExecute(result)
             try {
                 /* Extracting JSON returns from the API */
@@ -55,35 +56,39 @@ class MainActivity : AppCompatActivity() {
                 val sys = jsonObj.getJSONObject("sys")
                 val wind = jsonObj.getJSONObject("wind")
                 val weather = jsonObj.getJSONArray("weather").getJSONObject(0)
-
                 val updatedAt:Long = jsonObj.getLong("dt")
                 val updatedAtText = "Mis à jour le: "+ SimpleDateFormat("dd/MM/yyyy H:mm ", Locale.FRANCE).format(Date(updatedAt*1000))
-                val temp = main.getString("temp")+"°C"
+                val temp = main.getString("temp").substring(0,2) + "°C"
                 val tempMin = "Minimales: " + main.getString("temp_min")+"°C"
                 val tempMax = "Maximales: " + main.getString("temp_max")+"°C"
                 val pressure = main.getString("pressure")
                 val humidity = main.getString("humidity")
-
                 val sunrise:Long = sys.getLong("sunrise")
                 val sunset:Long = sys.getLong("sunset")
                 val windSpeed = wind.getString("speed")
-                val weatherState = weather.getString("main")
                 val weatherDescription = weather.getString("description")
+                val weatherMain = weather.getString("main")
+
+                /* Picasso gradle module, to add Weather image */
+                val weatherImgCode = weather.getString("icon")
+                val imgUrl: String = "https://openweathermap.org/img/wn/$weatherImgCode@4x.png"
+                Picasso.get().load(imgUrl).into(iv_Weather)
 
 
+                /*  Location */
                 val address = jsonObj.getString("name")+", "+sys.getString("country")
 
-                /* Populating extracted data into our views */
+                /* Link to Activity Main XML */
                 findViewById<TextView>(R.id.address).text = address
                 findViewById<TextView>(R.id.updated_at).text =  updatedAtText
                 findViewById<TextView>(R.id.status).text = weatherDescription.capitalize()
-                findViewById<TextView>(R.id.weather_state).text = weatherState.capitalize()
+                findViewById<TextView>(R.id.status_main).text = weatherMain.capitalize()
                 findViewById<TextView>(R.id.temp).text = temp
                 findViewById<TextView>(R.id.temp_min).text = tempMin
                 findViewById<TextView>(R.id.temp_max).text = tempMax
                 findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise*1000))
                 findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset*1000))
-                findViewById<TextView>(R.id.wind).text = windSpeed
+                findViewById<TextView>(R.id.wind_speed).text = windSpeed
                 findViewById<TextView>(R.id.pressure).text = pressure
                 findViewById<TextView>(R.id.humidity).text = humidity
 
