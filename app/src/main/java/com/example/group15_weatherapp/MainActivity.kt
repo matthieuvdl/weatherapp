@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         override fun doInBackground(vararg params: String?): String? {
             var response:String?
             try{
-                response = URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&units=metric&appid=$API").readText(
+                response = URL("https://api.openweathermap.org/data/2.5/weather?q=$CITY&lang=fr&units=metric&appid=$API").readText(
                     Charsets.UTF_8
                 )
             }catch (e: Exception){
@@ -61,11 +61,12 @@ class MainActivity : AppCompatActivity() {
                 val temp = main.getString("temp").substring(0,2) + "°C"
                 val tempMin = "Minimales: " + main.getString("temp_min")+"°C"
                 val tempMax = "Maximales: " + main.getString("temp_max")+"°C"
-                val pressure = main.getString("pressure")
-                val humidity = main.getString("humidity")
+                val pressure = main.getString("pressure") + " hpa"
+                val humidity = main.getString("humidity") + "%"
                 val sunrise:Long = sys.getLong("sunrise")
                 val sunset:Long = sys.getLong("sunset")
-                val windSpeed = wind.getString("speed")
+                val windSpeed = wind.getString("speed") + " m/s"
+                val windDegree = wind.getString("deg") + "°"
                 val weatherDescription = weather.getString("description")
                 val weatherMain = weather.getString("main")
 
@@ -89,6 +90,7 @@ class MainActivity : AppCompatActivity() {
                 findViewById<TextView>(R.id.sunrise).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunrise*1000))
                 findViewById<TextView>(R.id.sunset).text = SimpleDateFormat("hh:mm a", Locale.ENGLISH).format(Date(sunset*1000))
                 findViewById<TextView>(R.id.wind_speed).text = windSpeed
+                findViewById<TextView>(R.id.wind_degree).text = windDegree
                 findViewById<TextView>(R.id.pressure).text = pressure
                 findViewById<TextView>(R.id.humidity).text = humidity
 

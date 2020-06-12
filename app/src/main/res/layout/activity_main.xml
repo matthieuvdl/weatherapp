@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_regular"
-                android:text="20 April 2012, 20:08 PM"
+                android:text="10 April 2020, 15:00 PM"
                 android:textSize="14dp" />
         </LinearLayout>
 
@@ -68,7 +68,7 @@
 
 
             <TextView
-                android:id="@+id/status"
+                android:id="@+id/status_main"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -77,8 +77,8 @@
                 android:textSize="14dp" />
 
             <TextView
-                android:id="@+id/status_main"
-                android:layout_width="184dp"
+                android:id="@+id/status"
+                android:layout_width="289dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:fontFamily="@font/montserrat_regular"
@@ -153,8 +153,8 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/sunrise"
-                        android:tint="#4C4C4C" />
+                        android:src="@drawable/wisunrise"
+                        android:tint="#000000" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -192,8 +192,8 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/sunset"
-                        android:tint="#4C4C4C" />
+                        android:src="@drawable/wisunset"
+                        android:tint="#000000" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -231,8 +231,8 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/wind"
-                        android:tint="#4C4C4C" />
+                        android:src="@drawable/wicloudygusts"
+                        android:tint="#000000" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -277,8 +277,8 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/pressure"
-                        android:tint="#4C4C4C" />
+                        android:src="@drawable/wibarometer"
+                        android:tint="#000000" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -316,8 +316,8 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/humidity"
-                        android:tint="#4C4C4C" />
+                        android:src="@drawable/wihumidity"
+                        android:tint="#000000" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -355,8 +355,8 @@
                     <ImageView
                         android:layout_width="25dp"
                         android:layout_height="25dp"
-                        android:src="@drawable/info"
-                        android:tint="#4C4C4C" />
+                        android:src="@drawable/wicloudywindy"
+                        android:tint="#000000" />
 
                     <Space
                         android:layout_width="wrap_content"
@@ -366,11 +366,11 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
-                        android:text="Créé par"
+                        android:text="Degré du vent"
                         android:textSize="12dp" />
 
                     <TextView
-                        android:id="@+id/about"
+                        android:id="@+id/wind_degree"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_regular"
